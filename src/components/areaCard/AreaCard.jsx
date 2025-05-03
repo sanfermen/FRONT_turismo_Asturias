@@ -1,3 +1,4 @@
+import "./AreaCard.css";
 
 function AreaCard({ area }) {
 	const {
@@ -13,14 +14,7 @@ function AreaCard({ area }) {
 	} = area;
 
 	return (
-		<div style={{
-			border: "1px solid #ccc",
-			borderRadius: "10px",
-			padding: "1rem",
-			margin: "1rem",
-			width: "300px",
-			boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
-		}}>
+		<div className="area_card">
 			<img
 				src={image}
 				alt={name}
