@@ -1,0 +1,13 @@
+.sideBar {
+	width: 300px;
+	background-color: white;
+	overflow-y: auto;
+	padding: 1rem;
+	z-index: 1;
+}
+
+.checkbox-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}

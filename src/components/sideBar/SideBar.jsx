@@ -10,7 +10,7 @@ function SideBar({ activeFilters, setActiveFilters }) {
 		}
 	};
 	return (
-		<div>
+		<div className="checkbox-list">
 			<label><input type="checkbox" value="area" onChange={handleChange} />Áreas</label>
 			<label><input type="checkbox" value="beach" onChange={handleChange} />Playas</label>
 			<label><input type="checkbox" value="museum" onChange={handleChange} />Museos</label>

@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from "leaflet";
 import AreaCard from "../areaCard/AreaCard";
+
+import "leaflet/dist/leaflet.css";
+import "./markerCluster.css"
 import "./MapLeaflet.css";
 
 // Solución al problema de iconos de Leaflet en React
@@ -17,15 +19,34 @@ const CardComponents = {
 	area: AreaCard
 }
 
+// Crear iconos de cluster según el tipo
+function createClusterCustomIcon(cluster) {
+	const markers = cluster.getAllChildMarkers();
+	const tipo = markers[0]?.options.tipo || "default";
+	const count = cluster.getChildCount();
+  
+	let sizeClass = "small";
+	if (count >= 15) sizeClass = "medium";
+	if (count >= 30) sizeClass = "large";
+  
+	return L.divIcon({
+	  html: `<div class="marker-cluster ${tipo} ${sizeClass}"><span>${count}</span></div>`,
+	  className: "marker-cluster-wrapper",
+	  iconSize: L.point(40, 40, true)
+	});
+  }
+
+// Obtener markers según el tipo de sitio
 function getIcon(type) {
 	return L.icon({
 		iconUrl:`../../assets/icons/${type}.png`,
-		iconSize: [30, 30],
+		iconSize: [60, 70],
 		iconAnchor: [15, 30],
 		popupAnchor: [0, -30]
 	});
 }
 
+// Obtener id único del elemento
 function getItemId(item, type) {
 	return item[`${type}_id`] || item.name;
 }
@@ -35,12 +56,19 @@ function MapView({ activeFilters, mapData }) {
 	return (
 	  <MapContainer center={[43.378564, -5.958032]} zoom={8} style={{ height: '100vh' }}>
 		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-		{activeFilters.map((type) =>
-		mapData[type]
-			?.filter(item =>
-			!isNaN(Number(item.latitude)) &&
-			!isNaN(Number(item.longitude)) &&
-			getItemId(item, type)
+		<MarkerClusterGroup
+		  chunkedLoading
+		  showCoverageOnHover={false}
+		  spiderfyOnMaxZoom
+		  zoomToBoundsOnClick
+		  iconCreateFunction={createClusterCustomIcon}
+		>
+		{activeFilters.flatMap((type) =>
+			(mapData[type] || [])
+				.filter(item =>
+					!isNaN(Number(item.latitude)) &&
+					!isNaN(Number(item.longitude)) &&
+					getItemId(item, type)
 			)
 		  	.map((item) => {
 			const CardComponent = CardComponents[type];
@@ -48,18 +76,19 @@ function MapView({ activeFilters, mapData }) {
 			return (
 			  <Marker
 				key={`${type}-${getItemId(item, type)}`}
-				position={[Number(item.latitude), Number(item.longitude)]}
+				position={[parseFloat(item.latitude), parseFloat(item.longitude)]}
 				icon={getIcon(type)}
+				tipo={type}
 			  >
 				<Popup className="cardComponent-popup" maxWidth={320}>
 				  {CardComponent ? (
 					<CardComponent {...{ [type]: item }} />
 				  ) : (
-					// Fallback por si no hay un componente específico para este tipo
+					// Por si no hay un componente específico para este tipo
 					<div>
-					  <strong>{item.nombre || item.name}</strong>
+					  <strong>{item.name}</strong>
 					  <br />
-					  {item.descripcion || "Sin descripción"}
+					  {item.description || "Sin descripción"}
 					</div>
 				  )}
 				</Popup>
@@ -67,6 +96,7 @@ function MapView({ activeFilters, mapData }) {
 			);
 		  })
 		)}
+		</MarkerClusterGroup>
 	  </MapContainer>
 	);
 }

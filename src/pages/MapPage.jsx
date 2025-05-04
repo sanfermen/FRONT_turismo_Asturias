@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SideBar from "../components/sideBar/SideBar";
 import MapView from "../components/mapLeaflet/MapLeaflet";
+import NavBar from "../components/navBar/NavBar"
 import "./MapPage.css";
 import { getAllAreas } from "../utils/api/area";
 import { getAllBeaches } from "../utils/api/beach";
@@ -11,7 +12,7 @@ import { getAllRockArt } from "../utils/api/rockArt";
 
 
 function MapPage() {
-	const [activeFilters, setActiveFilters] = useState(["area"]);
+	const [activeFilters, setActiveFilters] = useState([]);
 	const [mapData, setMapData] = useState({});
 	const fetchFunctions = {
 		area: getAllAreas,
@@ -38,9 +39,9 @@ function MapPage() {
 
 	return (
 		<div className="mapPage">
-			<header className="navbar">MAPA TURÍSTICO DE ASTURIAS</header> {/* TODO añadir el navbar */}
+			<NavBar />
 			<div className="mapLayout">
-				<div className="mapLeaflet">
+				<div className="map-leaflet">
 					<MapView activeFilters={activeFilters} mapData={mapData} />
 				</div>
 				<aside className="sideBar">

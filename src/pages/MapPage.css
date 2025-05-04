@@ -1,0 +1,12 @@
+.mapPage {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.mapLayout {
+	display: flex;
+	flex: 1;
+	overflow: hidden;
+}
+  
