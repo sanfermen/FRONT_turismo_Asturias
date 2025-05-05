@@ -18,12 +18,11 @@ function AreaCard({ area }) {
 			<img
 				src={image}
 				alt={name}
-				style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "8px" }}
 			/>
 			<h2>{name}</h2>
 			<p><strong>Dirección:</strong> {address}</p>
 			<p><strong>Tipo:</strong> {type === "public" ? "Pública" : "Privada"}</p>
-			<p><strong>Plazas:</strong> {places}</p>
+			{places && <p><strong>Plazas:</strong> {places}</p>}
 			<p><strong>Estancia máxima:</strong> {max_stay || "Sin límite"}</p>
 			<p>
 				<strong>Servicios:</strong>{" "}

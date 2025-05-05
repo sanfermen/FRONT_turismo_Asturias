@@ -2,6 +2,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from "leaflet";
 import AreaCard from "../areaCard/AreaCard";
+import BeachCard from "../beachCard/BeachCard";
+import MuseumCard from "../museumCard/MuseumCard";
+import PreromanCard from "../preromanCard/PreromanCard";
+import RockArtCard from "../rockArtCard/RockArtCard";
+import RouteCard from "../routeCard/RouteCard";
 
 import "leaflet/dist/leaflet.css";
 import "./markerCluster.css"
@@ -16,7 +21,12 @@ L.Icon.Default.mergeOptions({
 });
 
 const CardComponents = {
-	area: AreaCard
+	area: AreaCard,
+	beach: BeachCard,
+	museum: MuseumCard,
+	preroman: PreromanCard,
+	rockArt: RockArtCard,
+	route: RouteCard
 }
 
 // Crear iconos de cluster según el tipo
@@ -54,7 +64,7 @@ function getItemId(item, type) {
 function MapView({ activeFilters, mapData }) {
 	
 	return (
-	  <MapContainer center={[43.378564, -5.958032]} zoom={8} style={{ height: '100vh' }}>
+	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
 		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 		<MarkerClusterGroup
 		  chunkedLoading
