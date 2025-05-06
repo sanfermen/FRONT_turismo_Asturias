@@ -1,0 +1,13 @@
+.homePage {
+	background-image: url('/asturias.jpg'); /* Imagen desde carpeta public */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 100%;
+}
+
+.homeTitle {
+	color: white;
+
+}

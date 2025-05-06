@@ -7,6 +7,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	z-index: 1000; /* o un número más alto si ya usas z-index en otros sitios */
+  	position: relative
 }
 
 .navbar-left, .navbar-center, .navbar-right {
@@ -31,7 +34,7 @@
 }
 
 .navbar-logo {
-	height: 60px;
+	height: 80px;
 	cursor: pointer;
 }
 

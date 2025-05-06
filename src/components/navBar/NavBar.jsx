@@ -1,21 +1,34 @@
+import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
 import './NavBar.css';
 
-function Navbar ({onRouteChange}){
+function Navbar ({onLoginClick}){
+	const { userData, onLogout } = useContext(AuthContext);
+
     return (
         <nav className='navbar'>
-            <div className="navbar-left" onClick={() => onRouteChange("home")}>
-                <img src='/logo.png' alt='Logo' className='navbar-logo' />
+            <div className="navbar-left">
+				<NavLink to="/home">
+                	<img src='/logo_asturias.jpg' alt='Logo' className='navbar-logo' />
+				</NavLink>
 			</div>
 			<div className='navbar-center'>
-                <span className='navbar-title'>MAPA TURÍSTICO DE ASTURIAS</span>
+                <NavLink to="/map">MAPA TURÍSTICO DE ASTURIAS</NavLink>
 			</div>
 			<div className='navbar-right'>
-				<span className='navbar-link' onClick={() => onRouteChange("register")}>
-					Registrarse
-				</span>
-				<span className='navbar-link' onClick={() => onRouteChange("login")}>
-					Iniciar sesión
-				</span>
+				{!userData ? (
+					<>
+						<button onClick={onLoginClick}>Iniciar Sesión</button> 
+						{/* TODO register */}
+					</>
+				) : (
+					<>
+					<NavLink to="/profile">Mi perfil</NavLink>
+					<button onClick={onLogout}>Cerrar Sesión</button>
+					</>
+				)}
             </div>
         </nav>
     )
