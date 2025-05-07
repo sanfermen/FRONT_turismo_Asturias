@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HomeSide from "../../components/homeSide/homeSide";
+import MapButton from "../../components/mapButton/MapButton";
 import "./Home.css"
 
 function Home() {
@@ -10,6 +11,9 @@ function Home() {
 			</div>
 			<div className="homeTitle">
 				<h1>ASTURIAS A TU RITMO</h1>
+			</div>
+			<div className="homeButton">
+				<MapButton />
 			</div>
 		</div>
 	)
