@@ -1,5 +1,6 @@
 import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useFavourite } from "../../utils/hooks/useFavourite";
 
 import "./AreaCard.css";
 
@@ -17,13 +18,16 @@ function AreaCard({ area }) {
 	} = area;
 
 	const { userData } = useContext(AuthContext);
+	const { isFavourite, toggleFavourite } = useFavourite({
+		userId: userData?.user_id,
+		pointId: area.area_id,
+		type: "area"
+	});
+
 
 	return (
 		<div className="area_card">
-			<img
-				src={image}
-				alt={name}
-			/>
+			<img src={image} alt={name}/>
 			<h2>{name}</h2>
 			<p><strong>Dirección:</strong> {address}</p>
 			<p><strong>Tipo:</strong> {type === "public" ? "Pública" : "Privada"}</p>
@@ -40,7 +44,9 @@ function AreaCard({ area }) {
 			{userData && 
 				<>
 					<div className="favButton">
-						<button>Favorito</button>
+						<button onClick={toggleFavourite}>
+							{isFavourite ? "Quitar de favoritos" : "Añadir a favoritos"}
+						</button>
 					</div>
 					<div className="visitButton">
 						<button>Visitado</button>

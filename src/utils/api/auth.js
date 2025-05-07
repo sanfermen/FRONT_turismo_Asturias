@@ -30,11 +30,13 @@ async function logout() {
 }
 
 async function getUserInfo() {
-	const 
+	const result = await fetchData("/user-info");
+	return result;
 }
 
 export {
 	login,
 	register,
-	logout
+	logout,
+	getUserInfo
 }

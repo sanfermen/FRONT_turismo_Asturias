@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, register, logout } from "../utils/api/auth";
+import { login, register, logout, getUserInfo } from "../utils/api/auth";
 import { saveToken, removeToken } from "../utils/localStorage";
 
 const AuthContext = createContext({
@@ -18,7 +18,10 @@ const AuthProvider = ({children}) => {
 		handleGetUserInfo();
 	}, [])
 	const handleGetUserInfo = async() => {
-		const result = await getUser
+		const result = await getUserInfo();
+		if(result.user) {
+			setUserData(result.user);
+		}
 	}
 
 	const handleLogin = async (email, password) => {
@@ -35,7 +38,7 @@ const AuthProvider = ({children}) => {
 	}
 
 	const handleLogout = async () => { //TODO comprobar
-		const result = await logout();
+		logout();
 		setUserData(null);
 		navigate("/map");
 	}
