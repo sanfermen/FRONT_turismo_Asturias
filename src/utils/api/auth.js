@@ -6,11 +6,7 @@ async function login(email, password) {
 		email,
 		password
 	}
-
 	const result = await fetchData("/auth/login", "POST", data);
-	if (result.token) {
-		saveToken(result.token);
-	}
 	return result;
 }
 
@@ -31,6 +27,10 @@ async function logout() {
 	const result = await fetchData("/auth/logout", "POST");
 	removeToken();
 	return result;
+}
+
+async function getUserInfo() {
+	const 
 }
 
 export {

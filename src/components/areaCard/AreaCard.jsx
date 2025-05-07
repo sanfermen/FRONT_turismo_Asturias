@@ -1,3 +1,6 @@
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+
 import "./AreaCard.css";
 
 function AreaCard({ area }) {
@@ -12,6 +15,8 @@ function AreaCard({ area }) {
 		places,
 		max_stay
 	} = area;
+
+	const { userData } = useContext(AuthContext);
 
 	return (
 		<div className="area_card">
@@ -32,6 +37,16 @@ function AreaCard({ area }) {
 					black_water && "Aguas negras"
 				].filter(Boolean).join(", ") || "Ninguno"}
 			</p>
+			{userData && 
+				<>
+					<div className="favButton">
+						<button>Favorito</button>
+					</div>
+					<div className="visitButton">
+						<button>Visitado</button>
+					</div>
+				</>
+			}	
 		</div>
 	);
 }

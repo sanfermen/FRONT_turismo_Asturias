@@ -5,13 +5,13 @@ import { AuthContext } from '../../context/AuthContext';
 import './NavBar.css';
 
 function Navbar ({onLoginClick}){
-	const { userData, onLogout } = useContext(AuthContext);
+	const { onLogout, userData } = useContext(AuthContext);
 
     return (
         <nav className='navbar'>
             <div className="navbar-left">
-				<NavLink to="/home">
-                	<img src='/logo_asturias.jpg' alt='Logo' className='navbar-logo' />
+				<NavLink to="/">
+                	<img src='/logo_aturitmo.png' alt='Logo' className='navbar-logo' />
 				</NavLink>
 			</div>
 			<div className='navbar-center'>
