@@ -1,6 +1,10 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import L from "leaflet";
+import "leaflet-easybutton/src/easy-button.js";
+import "leaflet-easybutton/src/easy-button.css";
+import "font-awesome/css/font-awesome.min.css";
 import AreaCard from "../areaCard/AreaCard";
 import BeachCard from "../beachCard/BeachCard";
 import MuseumCard from "../museumCard/MuseumCard";
@@ -61,11 +65,30 @@ function getItemId(item, type) {
 	return item[`${type}_id`] || item.name;
 }
 
+// Crear botón de localización
+function LocationButton() {
+	const map = useMap();
+
+	useEffect(() => {
+		const button = L.easyButton("fa-dot-circle-o", () => {
+			map.locate().on("locationfound", function (e) {
+				map.flyTo(e.latlng, 14);
+			});
+		});
+		button.addTo(map);
+		return () =>{
+			map.removeControl(button);
+		};
+	}, [map]);
+	return null;
+}
+
 function MapView({ activeFilters, mapData }) {
 	
 	return (
 	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
 		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+		<LocationButton />
 		<MarkerClusterGroup
 		  chunkedLoading
 		  showCoverageOnHover={false}
@@ -82,25 +105,25 @@ function MapView({ activeFilters, mapData }) {
 			)
 		  	.map((item) => {
 			const CardComponent = CardComponents[type];
+			const position = [parseFloat(item.latitude), parseFloat(item.longitude)];
 			
 			return (
 			  <Marker
 				key={`${type}-${getItemId(item, type)}`}
-				position={[parseFloat(item.latitude), parseFloat(item.longitude)]}
+				position={position}
 				icon={getIcon(type)}
 				tipo={type}
 			  >
 				<Popup className="cardComponent-popup" maxWidth={320}>
-				  {CardComponent ? (
-					<CardComponent {...{ [type]: item }} />
-				  ) : (
-					// Por si no hay un componente específico para este tipo
-					<div>
-					  <strong>{item.name}</strong>
-					  <br />
-					  {item.description || "Sin descripción"}
-					</div>
-				  )}
+					{CardComponent ? (
+						<CardComponent {...{ [type]: item }} />
+				  	) : (
+						<div>
+						<strong>{item.name}</strong>
+						<br />
+						{item.description || "Sin descripción"}
+						</div>
+					)}
 				</Popup>
 			  </Marker>
 			);
