@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
+import DirectionsButton from "../DirectionsButton/DirectionsButton";
 
 import "./RouteCard.css";
 
@@ -8,6 +9,8 @@ function RouteCard({route}) {
 	const {
 		name,
 		image,
+		latitude,
+		longitude,
 		type,
 		information,
 		web,
@@ -33,6 +36,7 @@ function RouteCard({route}) {
 			<p><strong>Distancia: </strong> {distance} km.</p>
 			{time && <p><strong>Duración:</strong> {time}</p>}
 			{origin_destination && <p><strong>Origen-Destino:</strong> {origin_destination}</p>}
+			<DirectionsButton latitude={latitude} longitude={longitude} />
 			{userData && 
 				<>
 					<div className="favButton">

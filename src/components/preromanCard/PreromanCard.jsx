@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
+import DirectionsButton from "../DirectionsButton/DirectionsButton";
 
 import "./PreromanCard.css";
 
@@ -8,6 +9,8 @@ function PreromanCard({ preroman }) {
 	const {
 		name,
 		image,
+		latitude,
+		longitude,
 		unesco_heritage,
 		information,
 		web
@@ -27,6 +30,7 @@ function PreromanCard({ preroman }) {
 			<p><strong> {unesco_heritage && "Patrimonio de la Unesco"} </strong></p>
 			{information && <p><strong>Información:</strong> {information}</p>}
 			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
+			<DirectionsButton latitude={latitude} longitude={longitude} />
 			{ userData &&
 				<>
 				<div className="favButton">

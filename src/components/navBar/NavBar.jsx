@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
@@ -7,6 +7,8 @@ import './NavBar.css';
 
 function Navbar ({onLoginClick}){
 	const { onLogout, userData } = useContext(AuthContext);
+	const location = useLocation();
+	const isMapPage = location.pathname ==="/map";
 
     return (
         <nav className='navbar'>
@@ -16,7 +18,11 @@ function Navbar ({onLoginClick}){
 				</NavLink>
 			</div>
 			<div className='navbar-center'>
-                <NavLink to="/map">MAPA TURÍSTICO DE ASTURIAS</NavLink>
+                {isMapPage ? (
+					"MAPA TURÍSTICO DE ASTURIAS" 
+				) : (
+					<NavLink to="/map">MAPA TURÍSTICO DE ASTURIAS</NavLink>
+				)}
 			</div>
 			<div className='navbar-right'>
 				{!userData ? (

@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
+import DirectionsButton from "../DirectionsButton/DirectionsButton";
 
 import "./RockArtCard.css";
 
@@ -8,6 +9,8 @@ function RockArtCard({rockArt}) {
 	const {
 		name,
 		image,
+		latitude,
+		longitude,
 		period,
 		information,
 		web
@@ -27,6 +30,7 @@ function RockArtCard({rockArt}) {
 			<p><strong>Periodo:</strong> {period}</p>
 			<p><strong>Información:</strong> {information}</p>
 			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
+			<DirectionsButton latitude={latitude} longitude={longitude} />
 			{userData &&
 				<>
 					<div className="favButton">

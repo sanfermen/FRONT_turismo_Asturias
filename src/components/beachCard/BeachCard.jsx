@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
+import DirectionsButton from "../DirectionsButton/DirectionsButton";
 
 import "./BeachCard.css";
 
@@ -8,6 +9,8 @@ function BeachCard({ beach }) {
 	const {
 		name,
 		image,
+		latitude,
+		longitude,
 		information,
 		services,
 		beach_type
@@ -27,6 +30,7 @@ function BeachCard({ beach }) {
 			<p><strong>Información:</strong> {information}</p>
 			<p><strong>Servicios:</strong> {services}</p>
 			<p><strong>Tipo de playa:</strong> {beach_type}</p>
+			<DirectionsButton latitude={latitude} longitude={longitude} />
 			{userData &&
 				<>
 				<div className="favButton">

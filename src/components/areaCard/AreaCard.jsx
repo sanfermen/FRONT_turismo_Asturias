@@ -1,6 +1,7 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
+import DirectionsButton from "../DirectionsButton/DirectionsButton";
 
 import "./AreaCard.css";
 
@@ -8,6 +9,8 @@ function AreaCard({ area }) {
 	const {
 		name,
 		image,
+		latitude,
+		longitude,
 		address,
 		type,
 		drinking_water,
@@ -40,6 +43,7 @@ function AreaCard({ area }) {
 					black_water && "Aguas negras"
 				].filter(Boolean).join(", ") || "Ninguno"}
 			</p>
+			<DirectionsButton latitude={latitude} longitude={longitude} />
 			{userData && 
 				<>
 					<div className="favButton">
