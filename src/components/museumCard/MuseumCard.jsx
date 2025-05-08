@@ -29,7 +29,7 @@ function MuseumCard({museum}) {
 			<h2>{name}</h2>
 			<p><strong>Información:</strong> {information}</p>
 			<p><strong>Precio:</strong> {free && "Gratuito" || "De pago"}</p>
-			{web && <p><strong>Web:</strong> <a href={web} target="_blank"> {web}</a></p>}
+			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
 			{userData &&
 				<>
 				<div className="favButton">

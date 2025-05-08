@@ -29,7 +29,7 @@ function RouteCard({route}) {
 			<h2>{name}</h2>
 			<p><strong>Tipo de ruta:</strong> {type}</p>
 			<p><strong>Información:</strong> {information}</p>
-			{web && <p><strong>Web:</strong> <a href={web} target="_blank"> {web}</a></p>}
+			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
 			<p><strong>Distancia: </strong> {distance} km.</p>
 			{time && <p><strong>Duración:</strong> {time}</p>}
 			{origin_destination && <p><strong>Origen-Destino:</strong> {origin_destination}</p>}

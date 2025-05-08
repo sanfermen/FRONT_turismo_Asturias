@@ -26,7 +26,7 @@ function PreromanCard({ preroman }) {
 			<h2>{name}</h2>
 			<p><strong> {unesco_heritage && "Patrimonio de la Unesco"} </strong></p>
 			{information && <p><strong>Información:</strong> {information}</p>}
-			{web && <p><strong>Web:</strong> <a href={web} target="_blank"> {web}</a></p>}
+			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
 			{ userData &&
 				<>
 				<div className="favButton">
