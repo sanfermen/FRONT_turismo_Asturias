@@ -1,5 +1,5 @@
 import { AuthContext } from "../../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useFavourite } from "../../utils/hooks/useFavourite";
 
 import "./AreaCard.css";
@@ -23,7 +23,6 @@ function AreaCard({ area }) {
 		pointId: area.area_id,
 		type: "area"
 	});
-
 
 	return (
 		<div className="area_card">
