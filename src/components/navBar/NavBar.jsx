@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 import './NavBar.css';
 
@@ -25,7 +26,9 @@ function Navbar ({onLoginClick}){
 					</>
 				) : (
 					<>
-					<NavLink to="/profile">Mi perfil</NavLink>
+					<NavLink to="/profile">
+						<PersonPinIcon fontSize='large'/> {userData.name}
+					</NavLink>
 					<button onClick={onLogout}>Cerrar Sesión</button>
 					</>
 				)}
