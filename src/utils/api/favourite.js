@@ -14,8 +14,14 @@ async function removeFavourites(id) {
 	return await fetchData(`/favourite/${id}`, "DELETE");
 }
 
+async function getFavouritesWithData() {
+	const result = await fetchData("/favourites/with-data");
+	return result;
+}
+
 export {
 	getFavourites,
 	addFavourites,
-	removeFavourites
+	removeFavourites,
+	getFavouritesWithData
 }

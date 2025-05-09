@@ -6,12 +6,12 @@ async function getVisited() {
 }
 
 async function addVisited(visitData) {
-	const visited = await fetchData("/visited", "POST");
+	const visited = await fetchData("/visited", "POST", visitData);
 	return visited;
 }
 
 async function editVisited(id, visitData) {
-	const visited = await fetchData(`/visited/${id}`, "PUT");
+	const visited = await fetchData(`/visited/${id}`, "PUT", visitData);
 	return visited;
 }
 

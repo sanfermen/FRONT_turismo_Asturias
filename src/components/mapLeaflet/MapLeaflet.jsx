@@ -5,12 +5,12 @@ import L from "leaflet";
 import "leaflet-easybutton/src/easy-button.js";
 import "leaflet-easybutton/src/easy-button.css";
 import "font-awesome/css/font-awesome.min.css";
-import AreaCard from "../areaCard/AreaCard";
-import BeachCard from "../beachCard/BeachCard";
-import MuseumCard from "../museumCard/MuseumCard";
-import PreromanCard from "../preromanCard/PreromanCard";
-import RockArtCard from "../rockArtCard/RockArtCard";
-import RouteCard from "../routeCard/RouteCard";
+import AreaCard from "../cards/areaCard/AreaCard";
+import BeachCard from "../cards/beachCard/BeachCard";
+import MuseumCard from "../cards/museumCard/MuseumCard";
+import PreromanCard from "../cards/preromanCard/PreromanCard";
+import RockArtCard from "../cards/rockArtCard/RockArtCard";
+import RouteCard from "../cards/routeCard/RouteCard";
 
 import "leaflet/dist/leaflet.css";
 import "./markerCluster.css"

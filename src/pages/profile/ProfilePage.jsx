@@ -1,4 +1,4 @@
-import ProfileCard from "../../components/profileCard/profileCard";
+import ProfileCard from "../../components/cards/profileCard/profileCard";
 import Navbar from "../../components/navBar/NavBar";
 
 import "./ProfilePage.css";
