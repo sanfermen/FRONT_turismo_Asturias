@@ -40,7 +40,7 @@ const AuthProvider = ({children}) => {
 	const handleLogout = async () => { //TODO comprobar
 		logout();
 		setUserData(null);
-		navigate("/map");
+		navigate("/");
 	}
 
 	const handleRegister = async (name, email, password) => {
