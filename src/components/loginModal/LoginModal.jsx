@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext"
+
 import "./LoginModal.css";
 
 function LoginModal({ onClose }) {
@@ -14,14 +15,14 @@ function LoginModal({ onClose }) {
 		if (result.error) {
 			setError(result.error);
 		} else {
-			onClose(); // Cerrarlo si va bien
+			onClose();
 		};
 	}
 
 	return (
 		<div className="modal-login">
 			<div className="modal">
-				<button className="close-button" onClick={onClose}>X</button>
+				<button className="close-button" onClick={onClose}>x</button>
 				<h2>Iniciar Sesión</h2>
 				<form onSubmit={handleSubmit}>
 					<label>Email: 

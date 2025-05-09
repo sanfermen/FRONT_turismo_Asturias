@@ -5,7 +5,7 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 import './NavBar.css';
 
-function Navbar ({onLoginClick}){
+function Navbar ({onLoginClick, onRegisterClick}){
 	const { onLogout, userData } = useContext(AuthContext);
 	const location = useLocation();
 	const isMapPage = location.pathname ==="/map";
@@ -27,8 +27,8 @@ function Navbar ({onLoginClick}){
 			<div className='navbar-right'>
 				{!userData ? (
 					<>
+						<button onClick={onRegisterClick}>Registrarse</button>
 						<button onClick={onLoginClick}>Iniciar Sesión</button> 
-						{/* TODO register */}
 					</>
 				) : (
 					<>

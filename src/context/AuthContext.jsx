@@ -37,7 +37,7 @@ const AuthProvider = ({children}) => {
 		}
 	}
 
-	const handleLogout = async () => { //TODO comprobar
+	const handleLogout = async () => {
 		logout();
 		setUserData(null);
 		navigate("/");
@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
 		} else {
 			setUserData(result.user);
 			saveToken(result.token);
-			navigate("/"); //TODO a qué ruta va a mandar
+			navigate("/map");
 			return null;
 		}
 	}

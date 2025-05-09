@@ -9,6 +9,7 @@ import { getAllRoutes } from "../../utils/api/route";
 import { getAllPreroman } from "../../utils/api/preroman";
 import { getAllRockArt } from "../../utils/api/rockArt";
 import LoginModal from "../../components/loginModal/LoginModal";
+import RegisterModal from "../../components/registerModal/RegisterModal";
 import { AuthContext } from "../../context/AuthContext";
 
 import "./MapPage.css";
@@ -18,6 +19,7 @@ function MapPage() {
 	const [activeFilters, setActiveFilters] = useState([]);
 	const [mapData, setMapData] = useState({});
 	const [showLoginModal, setShowLoginModal] = useState(false);
+	const [showRegisterModal, setShowRegisterModal] = useState(false);
 	const fetchFunctions = {
 		area: getAllAreas,
 		beach: getAllBeaches,
@@ -41,10 +43,16 @@ function MapPage() {
 		});
 	}, [activeFilters]);
 
+	console.log("render");
+
 	return (
 		<div className="mapPage">
-			<NavBar onLoginClick = {() => setShowLoginModal(true)} />
+			<NavBar 
+				onLoginClick = {() => setShowLoginModal(true)} 
+				onRegisterClick = {() => setShowRegisterModal(true)}	
+			/>
 				{showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
+				{showRegisterModal && <RegisterModal onClose={() => setShowRegisterModal(false)} />}
 			<div className="mapLayout">
 				<div className="map-leaflet">
 					<MapView activeFilters={activeFilters} mapData={mapData} />
