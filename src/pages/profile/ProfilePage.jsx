@@ -2,11 +2,11 @@ import { useState } from "react";
 import ProfileCard from "../../components/cards/profileCard/profileCard";
 import Navbar from "../../components/navBar/NavBar";
 import FavouriteList from "../../components/FavouriteList/FavouriteList";
+import VisitedList from "../../components/visitedList/visitedList";
 
 import "./ProfilePage.css";
 
 function ProfilePage() {
-	const [activeFilters, setActiveFilters] = useState([]);
 
 	return (
 		<>
@@ -18,7 +18,10 @@ function ProfilePage() {
 					<ProfileCard />
 				</div>
 				<div className="favouriteList">
-					<FavouriteList  setActiveFilters={setActiveFilters}/>
+					<FavouriteList/>
+				</div>
+				<div className="visitedList">
+					<VisitedList />
 				</div>
 			</div>
 		</>

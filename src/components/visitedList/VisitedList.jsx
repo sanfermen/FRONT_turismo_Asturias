@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { getFavouritesWithData } from "../../utils/api/favourite";
-import FavouriteCard from "../cards/favouriteCard/FavouriteCard";
+import { getVisitedWithData } from "../../utils/api/visited";
+import VisitedCard from "../cards/visitedCard/VisitedCard";
 import { translateType } from "../../utils/helpers/translateType";
 
-import "./FavouriteList.css";
+import "./VisitedList.css";
 
-function FavouriteList() {
-	const [favouritesByType, setFavouritesByType] = useState({});
+function VisitedList() {
+	const [visitedByType, setVisitedByType] = useState({});
 	const [openTypes, setOpenTypes] = useState([]);
 
 	useEffect(() => {
-		const loadFavourites = async () => {
-			const data = await getFavouritesWithData();
-			setFavouritesByType(data);
+		const loadVisited = async () => {
+			const data = await getVisitedWithData();
+			setVisitedByType(data);
 		};
-		loadFavourites();
+		loadVisited();
 	}, []);
 
 	const toggleOpen = (type) => {
@@ -23,9 +23,9 @@ function FavouriteList() {
 	};
 
 	return (
-		<div className="favouriteList">
-			<h2>FAVORITOS</h2>
-			{Object.entries(favouritesByType)
+		<div className="visitedList">
+			<h2>VISITADOS</h2>
+			{Object.entries(visitedByType)
 				.filter(([_, items]) => Array.isArray(items))
 				.map(([type, items]) => (
 				<div key={type} className="accordionSection">
@@ -36,7 +36,7 @@ function FavouriteList() {
 						<div className="accordionContent">
 							{items.map((item) => (
 								<div key={item.area_id || item.route_id || item.museum_id || item.beach_id || item.preroman_id || item.rockArt_id}>
-									<FavouriteCard item={item} />
+									<VisitedCard item={item} />
 								</div>
 							))}
 						</div>
@@ -47,4 +47,4 @@ function FavouriteList() {
 	);
 }
 
-export default FavouriteList;
+export default VisitedList;

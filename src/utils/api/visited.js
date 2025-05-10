@@ -19,9 +19,15 @@ async function removeVisited(id) {
 	return await fetchData(`/visited/${id}`, "DELETE");
 }
 
+async function getVisitedWithData() {
+	const result = await fetchData("/visited/with-data");
+	return result;
+}
+
 export {
 	getVisited,
 	addVisited,
 	editVisited,
-	removeVisited
+	removeVisited,
+	getVisitedWithData
 }
