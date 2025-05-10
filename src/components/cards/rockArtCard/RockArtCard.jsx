@@ -2,7 +2,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useContext, useState } from "react";
 import { useFavourite } from "../../../utils/hooks/useFavourite";
 import { useVisited } from "../../../utils/hooks/useVisited";
-import DirectionsButton from "../../DirectionsButton/DirectionsButton";
+import DirectionsButton from "../../directionsButton/DirectionsButton";
 
 import "./RockArtCard.css";
 
