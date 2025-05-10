@@ -16,7 +16,7 @@ function translateType(type) {
 	}
 }
 
-function FavouriteList() {
+function FavouriteList({}) {
 	const [favouritesByType, setFavouritesByType] = useState({});
 	const [openTypes, setOpenTypes] = useState([]);
 
@@ -36,7 +36,9 @@ function FavouriteList() {
 	return (
 		<div className="favouriteList">
 			<h2>FAVORITOS</h2>
-			{Object.entries(favouritesByType).map(([type, items]) => (
+			{Object.entries(favouritesByType)
+				.filter(([_, items]) => Array.isArray(items))
+				.map(([type, items]) => (
 				<div key={type} className="accordionSection">
 					<button onClick={() => toggleOpen(type)}>
 						{translateType(type)} {openTypes.includes(type) ? "▲" : "▼"}
@@ -45,8 +47,7 @@ function FavouriteList() {
 						<div className="accordionContent">
 							{items.map((item) => (
 								<div key={item.area_id || item.route_id || item.museum_id || item.beach_id || item.preroman_id || item.rockArt_id}>
-									<p>{item.name}</p>
-									<FavouriteCard item={item} type={type}/>
+									<FavouriteCard item={item} />
 								</div>
 							))}
 						</div>

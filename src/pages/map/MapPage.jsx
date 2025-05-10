@@ -11,13 +11,11 @@ import { getAllRockArt } from "../../utils/api/rockArt";
 import LoginModal from "../../components/loginModal/LoginModal";
 import RegisterModal from "../../components/registerModal/RegisterModal";
 import { AuthContext } from "../../context/AuthContext";
-import { useMapContext } from "../../context/MapContext";
 
 import "./MapPage.css";
 
 function MapPage() {
 	const { userData } = useContext(AuthContext);
-	const { targetPoint } = useMapContext();
 	const [activeFilters, setActiveFilters] = useState([]);
 	const [mapData, setMapData] = useState({});
 	const [showLoginModal, setShowLoginModal] = useState(false);
@@ -30,22 +28,22 @@ function MapPage() {
 		preroman: getAllPreroman,
 		rockArt: getAllRockArt
 	};
-
+	// activar el filtro guardado desde el perfil (y borrarlos después)
 	useEffect(() => {
-		if (targetPoint && !activeFilters.includes(targetPoint.type)) {
-			// para que no se activen 2 veces el mismo tipo de datos
-			setActiveFilters((prev) => 
-				prev.includes(targetPoint.type) ? prev : [...prev, targetPoint.type]);
+		const storedFilter = localStorage.getItem("activeFilterFromProfile");
+		if (storedFilter) {
+			setActiveFilters((prev) =>
+				prev.includes(storedFilter) ? prev : [...prev, storedFilter]);
+			localStorage.removeItem("activeFilterFromProfile");
 		}
-	}, [targetPoint]);
-
+	}, []);
+	// cargar los datos según el filtro activo
 	useEffect(() => {
 		activeFilters.forEach(async (type) => {
 			if (!mapData[type]) {
 				try {
-					fetchFunctions[type]().then((data) => {
-						setMapData((prev) => ({ ...prev, [type]: data }));
-					});
+					const data = await fetchFunctions[type]();
+					setMapData((prev) => ({ ...prev, [type]: data }));
 				} catch (err) {
 					console.error(`Error cargando datos de ${type}`,err);
 				}

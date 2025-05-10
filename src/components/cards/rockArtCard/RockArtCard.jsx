@@ -20,12 +20,12 @@ function RockArtCard({rockArt}) {
 	const { userData } = useContext(AuthContext);
 	const { isFavourite, toggleFavourite } = useFavourite({
 		userId: userData?.user_id,
-		pointId: rockArt.rockArt_id,
+		pointId: rockArt.rock_art_id,
 		type: "rockArt"
 	});
 	const {isVisited, visitData, handleAddVisited, handleRemoveVisited, error} = useVisited({
 		userId: userData?.user_id,
-		pointId: rockArt.rockArt_id,
+		pointId: rockArt.rock_art_id,
 		type: "rockArt"
 	});
 	const [showVisitForm, setShowVisitForm] = useState(false);

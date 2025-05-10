@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ProfileCard from "../../components/cards/profileCard/profileCard";
 import Navbar from "../../components/navBar/NavBar";
 import FavouriteList from "../../components/FavouriteList/FavouriteList";
@@ -5,6 +6,8 @@ import FavouriteList from "../../components/FavouriteList/FavouriteList";
 import "./ProfilePage.css";
 
 function ProfilePage() {
+	const [activeFilters, setActiveFilters] = useState([]);
+
 	return (
 		<>
 			<header>
@@ -15,7 +18,7 @@ function ProfilePage() {
 					<ProfileCard />
 				</div>
 				<div className="favouriteList">
-					<FavouriteList />
+					<FavouriteList  setActiveFilters={setActiveFilters}/>
 				</div>
 			</div>
 		</>

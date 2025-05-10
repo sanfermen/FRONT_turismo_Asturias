@@ -20,12 +20,12 @@ function PreromanCard({ preroman }) {
 	const { userData } = useContext(AuthContext);
 	const { isFavourite, toggleFavourite } = useFavourite({
 		userId: userData?.user_id,
-		pointId: preroman.preroman_id,
+		pointId: preroman.preroman_art_id,
 		type: "preroman"
 	});
 	const {isVisited, visitData, handleAddVisited, handleRemoveVisited, error} = useVisited({
 		userId: userData?.user_id,
-		pointId: preroman.preroman_id,
+		pointId: preroman.preroman_art_id,
 		type: "preroman"
 	});
 	const [showVisitForm, setShowVisitForm] = useState(false);
