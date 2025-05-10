@@ -11,6 +11,8 @@ import { getAllRockArt } from "../../utils/api/rockArt";
 import LoginModal from "../../components/loginModal/LoginModal";
 import RegisterModal from "../../components/registerModal/RegisterModal";
 import { AuthContext } from "../../context/AuthContext";
+import { getFavouritesWithData } from "../../utils/api/favourite";
+import { getVisitedWithData } from "../../utils/api/visited";
 
 import "./MapPage.css";
 
@@ -26,32 +28,38 @@ function MapPage() {
 		museum: getAllMuseums,
 		route: getAllRoutes,
 		preroman: getAllPreroman,
-		rockArt: getAllRockArt
+		rockArt: getAllRockArt,
+		favourite: getFavouritesWithData,
+		visited: getVisitedWithData
 	};
-	// activar el filtro guardado desde el perfil (y borrarlos después)
-	useEffect(() => {
-		const storedFilter = localStorage.getItem("activeFilterFromProfile");
-		if (storedFilter) {
-			setActiveFilters((prev) =>
-				prev.includes(storedFilter) ? prev : [...prev, storedFilter]);
-			localStorage.removeItem("activeFilterFromProfile");
-		}
-	}, []);
+
 	// cargar los datos según el filtro activo
 	useEffect(() => {
-		activeFilters.forEach(async (type) => {
-			if (!mapData[type]) {
-				try {
-					const data = await fetchFunctions[type]();
-					setMapData((prev) => ({ ...prev, [type]: data }));
-				} catch (err) {
-					console.error(`Error cargando datos de ${type}`,err);
+		const loadData = async () => {
+			let newData = {};
+
+			if (activeFilters.length === 0) {
+				setMapData({});
+				return;
+			}
+
+			if (activeFilters.includes("favourite")) {
+				newData = await getFavouritesWithData();
+			} else if (activeFilters.includes("visited")) {
+				newData = await getVisitedWithData();
+			} else {
+				// Si no hay filtros especiales, cargar por tipo
+				for (const type of activeFilters) {
+					if (fetchFunctions[type]) {
+						const data = await fetchFunctions[type]();
+						newData[type] = data;
+					}
 				}
 			}
-		});
+			setMapData(newData);
+		};
+		loadData();
 	}, [activeFilters]);
-
-	console.log("render");
 
 	return (
 		<div className="mapPage">
@@ -66,7 +74,7 @@ function MapPage() {
 					<MapView activeFilters={activeFilters} mapData={mapData} />
 				</div>
 				<aside className="sideBar">
-					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
+					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData}/>
 				</aside>
 			</div>
 		</div>

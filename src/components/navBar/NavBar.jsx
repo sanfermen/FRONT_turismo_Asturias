@@ -14,7 +14,7 @@ function Navbar ({onLoginClick, onRegisterClick}){
         <nav className='navbar'>
             <div className="navbar-left">
 				<NavLink to="/">
-                	<img src='/logo_aturitmo.png' alt='Logo' className='navbar-logo' />
+                	<img src='/logo_asturias_aturitmo.png' alt='Logo' className='navbar-logo' />
 				</NavLink>
 			</div>
 			<div className='navbar-center'>

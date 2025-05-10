@@ -84,6 +84,12 @@ function LocationButton() {
 }
 
 function MapView({ activeFilters, mapData }) {
+	const filteredData = {};
+	Object.keys(mapData).forEach(type => {
+		if (activeFilters.includes(type) || activeFilters.includes("favourite") || activeFilters.includes("visited")) {
+			filteredData[type] = mapData[type];
+		}
+	});
 	
 	return (
 	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
@@ -96,16 +102,17 @@ function MapView({ activeFilters, mapData }) {
 		  zoomToBoundsOnClick
 		  iconCreateFunction={createClusterCustomIcon}
 		>
-		{activeFilters.flatMap((type) =>
-			(mapData[type] || [])
-				.filter(item =>
+		{Object.entries(filteredData).flatMap(([type, items]) =>
+			(Array.isArray(items) ? items : [])
+				.filter(
+				item =>
 					!isNaN(Number(item.latitude)) &&
 					!isNaN(Number(item.longitude)) &&
 					getItemId(item, type)
-			)
-		  	.map((item) => {
-			const CardComponent = CardComponents[type];
-			const position = [parseFloat(item.latitude), parseFloat(item.longitude)];
+				)
+				.map((item) => {
+				const CardComponent = CardComponents[type];
+				const position = [parseFloat(item.latitude), parseFloat(item.longitude)];
 			
 			return (
 			  <Marker
