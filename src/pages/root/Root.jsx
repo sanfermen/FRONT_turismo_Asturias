@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { AuthProvider } from "../../context/AuthContext";
+import { MapProvider } from "../../context/MapContext";
 
 function Root() {
 	return (
 		<AuthProvider>
-			<main>
-				<Outlet />
-			</main>
+			<MapProvider>
+				<main>
+					<Outlet />
+				</main>
+			</MapProvider>
 		</AuthProvider>
 	)
 }

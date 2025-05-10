@@ -11,11 +11,13 @@ import { getAllRockArt } from "../../utils/api/rockArt";
 import LoginModal from "../../components/loginModal/LoginModal";
 import RegisterModal from "../../components/registerModal/RegisterModal";
 import { AuthContext } from "../../context/AuthContext";
+import { useMapContext } from "../../context/MapContext";
 
 import "./MapPage.css";
 
 function MapPage() {
 	const { userData } = useContext(AuthContext);
+	const { targetPoint } = useMapContext();
 	const [activeFilters, setActiveFilters] = useState([]);
 	const [mapData, setMapData] = useState({});
 	const [showLoginModal, setShowLoginModal] = useState(false);
@@ -30,12 +32,20 @@ function MapPage() {
 	};
 
 	useEffect(() => {
+		if (targetPoint && !activeFilters.includes(targetPoint.type)) {
+			// para que no se activen 2 veces el mismo tipo de datos
+			setActiveFilters((prev) => 
+				prev.includes(targetPoint.type) ? prev : [...prev, targetPoint.type]);
+		}
+	}, [targetPoint]);
+
+	useEffect(() => {
 		activeFilters.forEach(async (type) => {
 			if (!mapData[type]) {
 				try {
-					const data = await fetchFunctions[type]();
-					console.log("Datos cargados", type, data);
-					setMapData((prev) => ({ ...prev, [type]: data }));
+					fetchFunctions[type]().then((data) => {
+						setMapData((prev) => ({ ...prev, [type]: data }));
+					});
 				} catch (err) {
 					console.error(`Error cargando datos de ${type}`,err);
 				}

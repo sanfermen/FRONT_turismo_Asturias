@@ -1,0 +1,24 @@
+.favouriteCard {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+	margin-bottom: 0.5rem;
+	width: 500px;
+}
+
+.favouriteCard img.miniatura {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+.favouriteCard h3 {
+	margin: 0;
+	font-size: 1.1rem;
+}
