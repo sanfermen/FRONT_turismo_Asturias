@@ -28,12 +28,12 @@ const AuthProvider = ({children}) => {
 		const result = await login(email, password);
 		if (result.error) {
 			removeToken();
-			return result.error;
+			return {error: result.error};
 		} else {
 			setUserData(result.user);
 			saveToken(result.token);
 			navigate("/map");
-			return result;
+			return { success: true};
 		}
 	}
 
@@ -47,12 +47,12 @@ const AuthProvider = ({children}) => {
 		const result = await register(name, email, password);
 		if (result.error) {
 			removeToken();
-			return result.error;
+			return {error: result.error};
 		} else {
 			setUserData(result.user);
 			saveToken(result.token);
 			navigate("/map");
-			return null;
+			return {success: true};
 		}
 	}
 	return(
