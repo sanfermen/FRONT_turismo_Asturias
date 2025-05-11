@@ -1,14 +1,35 @@
 .sideBar {
 	width: 300px;
-	background-color: #748C6A;
+	background-color: #cfcece ;
 	overflow-y: auto;
-	padding: 1rem;
+	padding: 2rem 1rem 1rem 1rem;
 	z-index: 1;
+	box-shadow: -6px 0 12px rgba(0, 0, 0, 0.4);
+	transition: width 0.3s ease;
 }
 
 .checkbox-list {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
-	color: #FAF9F6;
+	gap: 1rem;
+	color: rgb(7, 62, 75);
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.checkbox-list input[type="checkbox"] {
+	transform: scale(1.3);
+	margin-right: 8px;
+}
+
+@media (max-width: 1200px) {
+	.sideBar {
+		width: 250px;
+	}
+}
+
+@media (max-width: 992px) {
+	.sideBar {
+		width: 200px;
+	}
 }

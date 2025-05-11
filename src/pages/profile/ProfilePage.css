@@ -1,0 +1,22 @@
+.profileLayout {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 2rem;
+	background-color: #cfcece;
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+.profilePageCard {
+	grid-column: 1;
+	margin-left: 100px;
+}
+
+.profileLists {
+	grid-column: 2;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+	overflow: hidden;
+	align-items: start;
+}

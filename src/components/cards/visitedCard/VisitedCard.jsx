@@ -11,9 +11,7 @@ function VisitedCard({ item }) {
 	return (
 		<div className="visitedCard">
 			{image && <img src={image} alt={name} className="miniatura" />}
-			<div className="visitedInfo">
-				<h3>{name}</h3>
-			</div>
+			<h3>{name}</h3>
 		</div>
 	);
 }

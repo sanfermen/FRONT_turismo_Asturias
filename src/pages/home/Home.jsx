@@ -9,8 +9,8 @@ function Home() {
 			<div className="homeSide">
 				<HomeSide />
 			</div>
-			<div className="homeTitle">
-				<h1>ASTURIAS A TU RITMO</h1>
+			<div className="logo">
+				<img src="/logo_asturias_aturitmo.png" alt="Logo" />
 			</div>
 			<div className="homeButton">
 				<MapButton />

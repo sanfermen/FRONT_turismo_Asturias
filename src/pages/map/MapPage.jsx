@@ -22,6 +22,11 @@ function MapPage() {
 	const [mapData, setMapData] = useState({});
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showRegisterModal, setShowRegisterModal] = useState(false);
+	const [showSideBar, setShowSideBar] = useState(false);
+
+	// Para detectar si es pantalla de móvil
+	const isMobile = window.innerWidth <= 768;
+
 	const fetchFunctions = {
 		area: getAllAreas,
 		beach: getAllBeaches,
@@ -69,11 +74,18 @@ function MapPage() {
 			/>
 				{showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
 				{showRegisterModal && <RegisterModal onClose={() => setShowRegisterModal(false)} />}
+
+				{isMobile && (
+					<button className="sidebar-toggle" onClick={() => setShowSideBar(!showSideBar)}>
+						Filtros
+					</button>
+				)}
+				
 			<div className="mapLayout">
 				<div className="map-leaflet">
 					<MapView activeFilters={activeFilters} mapData={mapData} />
 				</div>
-				<aside className="sideBar">
+				<aside className={`sideBar ${isMobile && showSideBar ? "visible" : ""}`}>
 					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData}/>
 				</aside>
 			</div>

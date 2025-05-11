@@ -5,6 +5,7 @@ import { useVisited } from "../../../utils/hooks/useVisited";
 import DirectionsButton from "../../directionsButton/DirectionsButton";
 
 import "./PreromanCard.css";
+import "../../../styles/CardBase.css";
 
 function PreromanCard({ preroman }) {
 	const {
@@ -34,7 +35,7 @@ function PreromanCard({ preroman }) {
 		<div className="preroman_card">
 			<img src={image} alt={name} />
 			<h2>{name}</h2>
-			<p><strong> {unesco_heritage && "Patrimonio de la Unesco"} </strong></p>
+			<h3> {unesco_heritage && "Patrimonio de la Unesco"} </h3>
 			{information && <p><strong>Información:</strong> {information}</p>}
 			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
 			<DirectionsButton latitude={latitude} longitude={longitude} />
@@ -42,7 +43,7 @@ function PreromanCard({ preroman }) {
 				<>
 				<div className="favButton">
 					<button onClick={toggleFavourite}>
-						{isFavourite ? "Quitar de favoritos" : "Añadir de favoritos"}
+						{isFavourite ? "Quitar de favoritos" : "Guardar como favorito"}
 					</button>
 				</div>
 				{isVisited ? (
@@ -54,7 +55,7 @@ function PreromanCard({ preroman }) {
 					) : (
 						<>
 							{showVisitForm ? (
-								<form onSubmit={(e) => {
+								<form className="visitFormWrapper" onSubmit={(e) => {
 									e.preventDefault();
 									const date = e.target.date.value;
 									const comment = e.target.comment.value;
@@ -67,8 +68,10 @@ function PreromanCard({ preroman }) {
 										placeholder="Añade tus comentarios"
 										maxLength="400"
 									/>
-									<button type="submit">Guardar visita</button>
-									<button type="button" onClick={() => setShowVisitForm(false)}>Cancelar</button>
+									<div className="visitFormButtons">
+										<button type="submit">Guardar visita</button>
+										<button type="button" onClick={() => setShowVisitForm(false)}>Cancelar</button>
+									</div>
 									{error && <p className="error">{error}</p>}
 								</form>
 							) : (
@@ -78,7 +81,7 @@ function PreromanCard({ preroman }) {
 										e.stopPropagation();
 										setShowVisitForm(true);
 									}}
-								>	Añadir Visitado
+								>	Marcar como visitado
 								</button>
 							)}
 						</>

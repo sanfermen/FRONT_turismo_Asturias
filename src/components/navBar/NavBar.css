@@ -8,7 +8,7 @@
 	justify-content: space-between;
 	padding: 0 1rem;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-	z-index: 1000; /* o un número más alto si ya usas z-index en otros sitios */
+	z-index: 1000;
   	position: relative
 }
 
@@ -23,10 +23,24 @@
 }
 
 .navbar-center {
+	flex: 2;
+	display: flex;
 	justify-content: center;
+	align-items: center;
+	text-align: center;
 	font-weight: bold;
 	font-size: 1.2rem;
-	color: #748C6A;
+	color: #cfcece;
+}
+
+.navbar-center a {
+	text-decoration: none;
+	color: inherit;
+	transition: color 0.3s ease;
+}
+
+.navbar-center a:hover {
+	color: rgb(162, 164, 165);
 }
 
 .navbar-right {
@@ -34,8 +48,14 @@
 	gap: 1rem;
 }
 
+.navbar-left,
+.navbar-right {
+	flex: 1;
+}
+
 .navbar-logo {
 	height: 80px;
+	margin-top: 5px;
 	cursor: pointer;
 }
 
@@ -43,4 +63,98 @@
 	font-size: 1rem;
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.navbar-right button {
+	background-color: #ffffff;
+	color: #07404c;
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 8px 16px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.navbar-right button:hover {
+	background-color: rgb(162, 164, 165);
+}
+
+.navbar-right a {
+	text-decoration: none;
+	color: #cfcece;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-size: 1.5rem;
+	transition: color 0.3s ease;
+	margin-right: 20px;
+}
+
+.navbar-right a:hover {
+	color: rgb(162, 164, 165);
+	transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+	.navbar-center {
+		font-size: 1.2rem;
+	}
+}
+
+@media (max-width: 992px) {
+	.navbar-center {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.hamburger {
+		background: none;
+		border: none;
+		color: white;
+		cursor: pointer;
+	}
+	
+	.mobile-menu {
+		position: absolute;
+		top: 60px;
+		width: 40%;
+		background-color: rgba(255,255,255,0.95);
+		border-radius: 8px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 1rem;
+		gap: 0.5rem;
+		z-index: 999;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	}
+	
+	.mobile-menu button,
+	.mobile-menu a {
+		background: none;
+		color: #073e4b;
+		border: none;
+		font-size: 1rem;
+		text-align: left;
+		width: 100%;
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	.navbar-left {
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.navbar-right {
+		display: none;
+	}
+
+	.navbar-logo {
+		height: 50px;
+		margin-right: 0;
+	}
 }

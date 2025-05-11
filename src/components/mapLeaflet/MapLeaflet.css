@@ -4,3 +4,17 @@
 	width: 100%;
 	z-index: 0;
 }
+
+@media (max-width: 768px) {
+	.cardComponent-popup {
+		max-width: 80vw !important;
+		width: 80vw;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	
+	.cardComponent-popup .leaflet-popup-content {
+		margin: 0 !important;
+		width: 100% !important;
+	}
+}

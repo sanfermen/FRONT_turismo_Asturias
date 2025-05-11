@@ -5,6 +5,7 @@ import { useVisited } from "../../../utils/hooks/useVisited";
 import DirectionsButton from "../../directionsButton/DirectionsButton";
 
 import "./MuseumCard.css";
+import "../../../styles/CardBase.css";
 
 function MuseumCard({museum}) {
 	const {
@@ -42,7 +43,7 @@ function MuseumCard({museum}) {
 				<>
 				<div className="favButton">
 					<button onClick={toggleFavourite}>
-						{isFavourite ? "Quitar de favoritos" : "Añadir a favoritos"}
+						{isFavourite ? "Quitar de favoritos" : "Guardar como favorito"}
 					</button>
 				</div>
 				{isVisited ? (
@@ -54,7 +55,7 @@ function MuseumCard({museum}) {
 					) : (
 						<>
 							{showVisitForm ? (
-								<form onSubmit={(e) => {
+								<form className="visitFormWrapper" onSubmit={(e) => {
 									e.preventDefault();
 									const date = e.target.date.value;
 									const comment = e.target.comment.value;
@@ -67,8 +68,10 @@ function MuseumCard({museum}) {
 										placeholder="Añade tus comentarios"
 										maxLength="400"
 									/>
-									<button type="submit">Guardar visita</button>
-									<button type="button" onClick={() => setShowVisitForm(false)}>Cancelar</button>
+									<div className="visitFormButtons">
+										<button type="submit">Guardar visita</button>
+										<button type="button" onClick={() => setShowVisitForm(false)}>Cancelar</button>
+									</div>
 									{error && <p className="error">{error}</p>}
 								</form>
 							) : (
@@ -78,7 +81,7 @@ function MuseumCard({museum}) {
 										e.stopPropagation();
 										setShowVisitForm(true);
 									}}
-								>	Añadir Visitado
+								>	Marcar como visitado
 								</button>
 							)}
 						</>

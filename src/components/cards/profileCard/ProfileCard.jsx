@@ -17,6 +17,9 @@ function ProfileCard() {
 				<p><strong>Nombre:</strong>{userData.name}</p>
 				<p><strong>Email:</strong>{userData.email}</p>
 			</div>
+			<button className="editProfileButton" onClick={() => alert("Funcionalidad de edición próximamente")}>
+				Editar perfil
+			</button>
 		</div>
 	)
 }

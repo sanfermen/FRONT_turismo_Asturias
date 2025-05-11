@@ -1,0 +1,28 @@
+.mapButton a {
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0.5); /* Fondo traslúcido oscuro */
+	color: white;
+	text-decoration: none; /* Quita el subrayado */
+	font-size: 1.2rem; /* Tamaño de letra mayor */
+	padding: 15px 30px;
+	border-radius: 12px; /* Bordes redondeados */
+	text-align: center;
+	transition: background-color 0.3s ease;
+}
+
+.mapButton a:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+	.homeButton {
+		display: flex;
+		justify-content: center;
+		margin: 20px 0;
+	}
+
+	.homeButton a {
+		font-size: 1rem;
+		padding: 12px 24px;
+	}
+}

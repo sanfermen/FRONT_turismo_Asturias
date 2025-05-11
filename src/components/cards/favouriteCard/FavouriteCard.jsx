@@ -10,9 +10,7 @@ function FavouriteCard({ item }) {
 	return (
 		<div className="favouriteCard">
 			{image && <img src={image} alt={name} className="miniatura" />}
-			<div className="favouriteInfo">
-				<h3>{name}</h3>
-			</div>
+			<h3>{name}</h3>
 		</div>
 	);
 }

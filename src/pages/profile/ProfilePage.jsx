@@ -17,11 +17,13 @@ function ProfilePage() {
 				<div className="profilePageCard">
 					<ProfileCard />
 				</div>
-				<div className="favouriteList">
-					<FavouriteList/>
-				</div>
-				<div className="visitedList">
-					<VisitedList />
+				<div className="profileLists">
+					<div className="favouriteList">
+						<FavouriteList/>
+					</div>
+					<div className="visitedList">
+						<VisitedList />
+					</div>
 				</div>
 			</div>
 		</>
