@@ -1,11 +1,12 @@
 import { AuthContext } from "../../../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 import "./ProfileCard.css";
 
 function ProfileCard() {
 	const { userData } = useContext(AuthContext);
+	const [showEdit, setShowEdit] = useState(false);
 	
 
 	return (
@@ -17,7 +18,7 @@ function ProfileCard() {
 				<p><strong>Nombre:</strong>{userData.name}</p>
 				<p><strong>Email:</strong>{userData.email}</p>
 			</div>
-			<button className="editProfileButton" onClick={() => alert("Funcionalidad de edición próximamente")}>
+			<button className="editProfileButton" onClick={() => setShowEdit(true)}>
 				Editar perfil
 			</button>
 		</div>
