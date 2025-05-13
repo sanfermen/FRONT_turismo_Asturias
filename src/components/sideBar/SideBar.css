@@ -22,6 +22,40 @@
 	margin-right: 8px;
 }
 
+.council-search {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid #ccc;
+}
+
+.council-search input {
+	width: 100%;
+	padding: 6px;
+	margin-bottom: 6px;
+	box-sizing: border-box;
+}
+
+.council-search button {
+	width: 100%;
+	padding: 6px;
+}
+
+.suggestions-list {
+	border: 1px solid #ccc;
+	background: white;
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+.suggestions-list div {
+	padding: 6px 8px;
+	cursor: pointer;
+}
+
+.suggestions-list div:hover {
+	background: #f0f0f0;
+}
+
 @media (max-width: 1200px) {
 	.sideBar {
 		width: 250px;

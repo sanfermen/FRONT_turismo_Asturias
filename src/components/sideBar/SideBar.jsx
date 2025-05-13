@@ -1,12 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { getFavouritesWithData } from "../../utils/api/favourite";
 import { getVisitedWithData } from "../../utils/api/visited";
+import coordinates from "../../data/concejos-coords.json";
 
 import "./SideBar.css";
 
-function SideBar({ activeFilters, setActiveFilters, setMapData }) {
+function SideBar({ activeFilters, setActiveFilters, setMapData, map }) {
+	//normalize("NFD") separar letra con tilde en letra+tilde. Replace para quitar la tilde
+	const normalize = (str) =>
+		str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
 	const { userData } = useContext(AuthContext);
+	const [search, setSearch] = useState("");
+	// Filtrando los nombres de los concejos
+	const suggestions = Object.keys(coordinates).filter((key) =>
+		normalize(key).includes(normalize(search))
+	);
+
+	const SearchByCouncil = (input) => {
+		const inputValue = input || search;
+		const normalizedInput = normalize(inputValue);
+
+		const matchKey = Object.keys(coordinates).find(
+			(key) => normalize(key) === normalizedInput
+		)
+		const coords = matchKey ? coordinates[matchKey] : null;
+		if (!coords) {
+			alert("Concejo no encontrado");
+			return;
+		}
+		map.setView([coords.lat, coords.lon], 12)
+	};
+
 	const handleChange = (e) => {
 		const { value, checked } = e.target;
 
@@ -41,7 +67,26 @@ function SideBar({ activeFilters, setActiveFilters, setMapData }) {
 					<label><input type="checkbox" value="favourite" checked={activeFilters.includes("favourite")} onChange={handleChange}/>Favoritos</label>
 					<label><input type="checkbox" value="visited" checked={activeFilters.includes("visited")} onChange={handleChange}/>Visitados</label>
 				</>
-				}
+			}
+			<div className="council-search">
+				<h4>Buscar concejo</h4>
+				<input type="text" value={search} onChange={(e) =>
+					setSearch(e.target.value)}
+					placeholder="Ej. Gijón"
+					autoComplete="off"/>
+				{search && suggestions.length > 0 && (
+					<ul className="suggestion-list">
+						{suggestions.map((suggestion) => (
+							<div key={suggestion} onClick={() => {
+								setSearch(suggestion);
+								SearchByCouncil(suggestion);
+							}}>
+								{suggestion}
+							</div>
+						))}
+					</ul>
+				)}
+			</div>
 		</div>
 	);
 }

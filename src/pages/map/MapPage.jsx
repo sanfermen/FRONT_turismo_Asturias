@@ -23,6 +23,7 @@ function MapPage() {
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showRegisterModal, setShowRegisterModal] = useState(false);
 	const [showSideBar, setShowSideBar] = useState(false);
+	const [mapInstance, setMapInstance] = useState(null);
 
 	// Para detectar si es pantalla de móvil
 	const isMobile = window.innerWidth <= 768;
@@ -83,10 +84,10 @@ function MapPage() {
 				
 			<div className="mapLayout">
 				<div className="map-leaflet">
-					<MapView activeFilters={activeFilters} mapData={mapData} />
+					<MapView activeFilters={activeFilters} mapData={mapData} setMapInstance={setMapInstance}/>
 				</div>
 				<aside className={`sideBar ${isMobile && showSideBar ? "visible" : ""}`}>
-					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData}/>
+					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData} map={mapInstance}/>
 				</aside>
 			</div>
 		</div>
