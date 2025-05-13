@@ -83,16 +83,26 @@ function LocationButton() {
 	return null;
 }
 
-function MapView({ activeFilters, mapData }) {
+function MapView({ activeFilters, mapData, setMapInstance }) {
 	const filteredData = {};
 	Object.keys(mapData).forEach(type => {
 		if (activeFilters.includes(type) || activeFilters.includes("favourite") || activeFilters.includes("visited")) {
 			filteredData[type] = mapData[type];
 		}
 	});
+
+	// Para poder usar el buscador de Concejos desde SideBar
+	function CaptureMap({ setMapInstance }) {
+		const map = useMap();
+		useEffect(() => {
+			setMapInstance(map);
+		}, [map]);
+		return null;
+	}
 	
 	return (
 	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
+		<CaptureMap setMapInstance={setMapInstance} />
 		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 		<LocationButton />
 		<MarkerClusterGroup
