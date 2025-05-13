@@ -26,13 +26,23 @@
 	margin-top: 2rem;
 	padding-top: 1rem;
 	border-top: 1px solid #ccc;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.council-search h4 {
+	margin-bottom: 0.8rem;
 }
 
 .council-search input {
-	width: 100%;
-	padding: 6px;
-	margin-bottom: 6px;
+	width: 85%;
+	padding: 6px 8px;
+	border: 1px solid rgb(7, 62, 75);
+	border-radius: 6px;
 	box-sizing: border-box;
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
 }
 
 .council-search button {
@@ -41,10 +51,15 @@
 }
 
 .suggestions-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 	border: 1px solid #ccc;
 	background: white;
 	max-height: 150px;
 	overflow-y: auto;
+	width: 85%;
+	border-radius: 6px;
 }
 
 .suggestions-list div {
@@ -54,6 +69,28 @@
 
 .suggestions-list div:hover {
 	background: #f0f0f0;
+}
+
+.no-results {
+	margin: 4px 0;
+	font-size: 0.9rem;
+	color: #888;
+}
+
+.reset-view {
+	margin-top: 0.8rem;
+	padding: 6px 8px;
+	width: 85% !important;
+	border-radius: 6px;
+	border: 1px solid rgb(7, 62, 75);
+	background-color: white;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background 0.2s ease;
+}
+
+.reset-view:hover {
+	background-color: rgb(240, 248, 250);
 }
 
 @media (max-width: 1200px) {

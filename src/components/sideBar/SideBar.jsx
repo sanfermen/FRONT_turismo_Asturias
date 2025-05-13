@@ -78,7 +78,7 @@ function SideBar({ activeFilters, setActiveFilters, setMapData, map }) {
 					<ul className="suggestion-list">
 						{suggestions.map((suggestion) => (
 							<div key={suggestion} onClick={() => {
-								setSearch(suggestion);
+								setSearch("");
 								SearchByCouncil(suggestion);
 							}}>
 								{suggestion}
@@ -86,6 +86,16 @@ function SideBar({ activeFilters, setActiveFilters, setMapData, map }) {
 						))}
 					</ul>
 				)}
+				{search && suggestions.length === 0 && (
+					<p className="no-results">Sin resultados</p>
+				)}
+				<button className="reset-view" onClick={() => {
+					if (map && typeof map.setView === "function") {
+						map.setView([43.378564, -5.958032], 9);
+					}
+				}}>
+					Ver todo Asturias
+				</button>
 			</div>
 		</div>
 	);
