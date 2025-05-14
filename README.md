@@ -43,3 +43,7 @@ La aplicación estará disponible en http://localhost:5173 por defecto.
 El frontend se conecta con un backend desarrollado con Node.js y Sequelize. Puedes acceder al repositorio del backend aquí:
 [Repositorio del backend](https://github.com/sanfermen/API_turismo_Asturias.git)
 
+## Licencia
+
+Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más información.
+
