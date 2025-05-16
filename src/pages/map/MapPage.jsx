@@ -28,6 +28,13 @@ function MapPage() {
 	// Para detectar si es pantalla de móvil
 	const isMobile = window.innerWidth <= 768;
 
+	// Para cerrar el SideBar al hacer clic en el mapa
+	const handleMapClick = () => {
+		if (isMobile && showSideBar) {
+			setShowSideBar(false);
+		}
+	};
+
 	const fetchFunctions = {
 		area: getAllAreas,
 		beach: getAllBeaches,
@@ -84,7 +91,12 @@ function MapPage() {
 				
 			<div className="mapLayout">
 				<div className="map-leaflet">
-					<MapView activeFilters={activeFilters} mapData={mapData} setMapInstance={setMapInstance}/>
+					<MapView 
+						activeFilters={activeFilters} 
+						mapData={mapData} 
+						setMapInstance={setMapInstance} 
+						onMapClick={handleMapClick}
+					/>
 				</div>
 				<aside className={`sideBar ${isMobile && showSideBar ? "visible" : ""}`}>
 					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData} map={mapInstance}/>
