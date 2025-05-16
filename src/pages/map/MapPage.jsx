@@ -102,6 +102,9 @@ function MapPage() {
 					<SideBar activeFilters={activeFilters} setActiveFilters={setActiveFilters} setMapData={setMapData} map={mapInstance}/>
 				</aside>
 			</div>
+			<div className="map-credit">
+				Creado por <a href="https://www.linkedin.com/in/sandra-fernandez-menendez/" target="_blank" rel="noopener noreferrer">Sandra Fernández</a>
+			</div>
 		</div>
 	);
 }
