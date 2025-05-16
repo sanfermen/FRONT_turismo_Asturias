@@ -83,7 +83,7 @@ function LocationButton() {
 	return null;
 }
 
-function MapView({ activeFilters, mapData, setMapInstance }) {
+function MapView({ activeFilters, mapData, setMapInstance, onMapClick }) {
 	const filteredData = {};
 	Object.keys(mapData).forEach(type => {
 		if (activeFilters.includes(type) || activeFilters.includes("favourite") || activeFilters.includes("visited")) {
@@ -99,12 +99,25 @@ function MapView({ activeFilters, mapData, setMapInstance }) {
 		}, [map]);
 		return null;
 	}
+
+	function ClickCatcher({ onMapClick}) {
+		const map = useMap();
+		useEffect(() => {
+			if (!onMapClick) return;
+			map.on('click', onMapClick);
+			return () => {
+				map.off('click', onMapClick);
+			};
+		}, [map, onMapClick]);
+		return null;
+	}
 	
 	return (
 	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
 		<CaptureMap setMapInstance={setMapInstance} />
 		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 		<LocationButton />
+		<ClickCatcher onMapClick={onMapClick} />
 		<MarkerClusterGroup
 		  chunkedLoading
 		  showCoverageOnHover={false}
