@@ -51,7 +51,16 @@ function createClusterCustomIcon(cluster) {
   }
 
 // Obtener markers según el tipo de sitio
-function getIcon(type) {
+function getIcon(type, item) {
+	if (type === "route" && item.type) {
+		return L.icon({
+			iconUrl: `../../assets/icons/${item.type}.png`,
+			iconSize: [60, 70],
+			iconAnchor: [15, 30],
+			popupAnchor: [0, -30]
+		});
+	}
+
 	return L.icon({
 		iconUrl:`../../assets/icons/${type}.png`,
 		iconSize: [60, 70],
@@ -141,7 +150,7 @@ function MapView({ activeFilters, mapData, setMapInstance, onMapClick }) {
 			  <Marker
 				key={`${type}-${getItemId(item, type)}`}
 				position={position}
-				icon={getIcon(type)}
+				icon={getIcon(type, item)}
 				tipo={type}
 			  >
 				<Popup className="cardComponent-popup" maxWidth={320}>

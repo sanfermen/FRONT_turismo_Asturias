@@ -38,7 +38,6 @@ function RouteCard({route}) {
 		<div className="route_card">
 			<img src={image} alt={name} />
 			<h2>{name}</h2>
-			<p><strong>Tipo de ruta:</strong> {type}</p>
 			<p><strong>Información:</strong> {information}</p>
 			{web && <p> <a href={web} className="webLink" target="_blank"><strong>Saber más</strong></a></p>}
 			<p><strong>Distancia: </strong> {distance} km.</p>
