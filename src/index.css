@@ -1,3 +1,7 @@
+:root {
+	--font-main: "Inter", sans-serif;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -5,7 +9,9 @@
 }
 
 html, body {
-	font-family: "Segoe UI", "Gill Sans", sans-serif;
+	font-family: var(--font-main);
+	background-color: #f9fafb;
+	color: #1f2937
 }
 
 .map-page {

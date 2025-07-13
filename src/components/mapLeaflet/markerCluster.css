@@ -1,46 +1,52 @@
-/* Estilos base del clúster */
+/* Base del cluster */
 .marker-cluster {
-	border-radius: 50%;
-	color: white;
-	font-weight: bold;
-	text-align: center;
-	line-height: 40px;
-	width: 40px;
-	height: 40px;
-	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3), 0 4px 8px rgba(0,0,0,0.3);
+  background: radial-gradient(circle at 30% 30%, #82caff, #1c80d1);
+  transition: transform 0.2s ease-in-out;
+  font-family: system-ui, sans-serif;
 }
-  
-/* Agrupaciones según tamaño */
-/* .marker-cluster-small {
-	background-color: rgba(181, 226, 140, 0.6);
-} */
-  
+
+/* Tamaño según número */
+.marker-cluster-small {
+  width: 40px;
+  height: 40px;
+  font-size: 13px;
+  background: radial-gradient(circle, #b3e5fc, #0288d1);
+}
+
 .marker-cluster-medium {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	font-size: 15px;
+  width: 50px;
+  height: 50px;
+  font-size: 14px;
+  background: radial-gradient(circle, #d1c4e9, #7e57c2);
 }
-  
+
 .marker-cluster-large {
-	width: 60px;
-	height: 60px;
-	line-height: 60px;
-	font-size: 16px;
+  width: 60px;
+  height: 60px;
+  font-size: 15px;
+  background: radial-gradient(circle, #c8e6c9, #43a047);
 }
 
-/* Interno del div que muestra el número */
-.marker-cluster div {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
+.marker-cluster span {
+  padding: 4px;
+  line-height: 1;
 }
 
-/* Colores por tipo */
-.marker-cluster.area { background-color: #4caf50; }
-.marker-cluster.beach { background-color: #2196f3; }
-.marker-cluster.museum { background-color: #9c27b0; }
-.marker-cluster.route { background-color: #ff9800; }
-.marker-cluster.rockArt { background-color: #795548; }
-.marker-cluster.preroman { background-color: #607d8b; }
-  
+.leaflet-marker-icon.leaflet-cluster-spider-leg,
+.leaflet-marker-icon.leaflet-cluster-spider-leg ~ .leaflet-marker-icon {
+  transition: transform 1.8s ease, opacity 0.4s ease;
+  will-change: transform;
+}
+
+/* Todos los markers separados por spiderfy */
+.leaflet-marker-icon.leaflet-marker-draggable {
+  transition: transform 0.8s ease-out;
+}

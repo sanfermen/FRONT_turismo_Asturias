@@ -35,18 +35,15 @@ const CardComponents = {
 
 // Crear iconos de cluster según el tipo
 function createClusterCustomIcon(cluster) {
-	const markers = cluster.getAllChildMarkers();
-	const tipo = markers[0]?.options.tipo || "default";
 	const count = cluster.getChildCount();
-  
-	let sizeClass = "small";
-	if (count >= 15) sizeClass = "medium";
-	if (count >= 30) sizeClass = "large";
-  
+	let sizeClass = "marker-cluster-small";
+	if (count >= 15 && count < 30) sizeClass = "marker-cluster-medium";
+	if (count >= 30) sizeClass = "marker-cluster-large";
+
 	return L.divIcon({
-	  html: `<div class="marker-cluster ${tipo} ${sizeClass}"><span>${count}</span></div>`,
-	  className: "marker-cluster-wrapper",
-	  iconSize: L.point(40, 40, true)
+		html: `<div class="marker-cluster ${sizeClass}"><span>${count}</span></div>`,
+		className: "", // sin wrapper extra
+		iconSize: L.point(40, 40, true)
 	});
   }
 
@@ -54,7 +51,7 @@ function createClusterCustomIcon(cluster) {
 function getIcon(type, item) {
 	if (type === "route" && item.type) {
 		return L.icon({
-			iconUrl: `../../assets/icons/${item.type}.png`,
+			iconUrl: `../../assets/icons3/${item.type}.png`,
 			iconSize: [60, 70],
 			iconAnchor: [15, 30],
 			popupAnchor: [0, -30]
@@ -62,7 +59,7 @@ function getIcon(type, item) {
 	}
 
 	return L.icon({
-		iconUrl:`../../assets/icons/${type}.png`,
+		iconUrl:`../../assets/icons3/${type}.png`,
 		iconSize: [60, 70],
 		iconAnchor: [15, 30],
 		popupAnchor: [0, -30]
@@ -122,9 +119,12 @@ function MapView({ activeFilters, mapData, setMapInstance, onMapClick }) {
 	}
 	
 	return (
-	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh' }}>
+	  <MapContainer center={[43.378564, -5.958032]} zoom={9} style={{ height: '100vh', width: '100%' }}>
 		<CaptureMap setMapInstance={setMapInstance} />
-		<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+		<TileLayer 
+			url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+  			attribution='&copy; <a href="https://carto.com/">CARTO</a> contributors' 
+		/>
 		<LocationButton />
 		<ClickCatcher onMapClick={onMapClick} />
 		<MarkerClusterGroup
@@ -132,6 +132,8 @@ function MapView({ activeFilters, mapData, setMapInstance, onMapClick }) {
 		  showCoverageOnHover={false}
 		  spiderfyOnMaxZoom
 		  zoomToBoundsOnClick
+		  animate={true}
+		  disableClusteringAtZoom={18}
 		  iconCreateFunction={createClusterCustomIcon}
 		>
 		{Object.entries(filteredData).flatMap(([type, items]) =>
